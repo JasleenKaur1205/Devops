@@ -1,0 +1,36 @@
+Create a Docker volume:
+   docker volume create studentdata
+
+2. Verify volume creation:
+   docker volume ls
+
+3. Run an Ubuntu container and mount the volume at /student:
+   docker run -it --name ubuntu1 -v studentdata:/student ubuntu bash
+
+4. Inside the container, create a file in the mounted directory:
+   cd /student
+   echo "This file is stored in Docker volume" > file1.txt
+   ls
+
+5. Exit and delete the container:
+   exit
+   docker rm ubuntu1
+
+6. Run another container with the same volume:
+
+docker run -it --name ubuntu2 -v studentdata:/student ubuntu bash
+
+7. Verify file persistence:
+   cd /student
+   ls
+   cat file1.txt
+
+8. Demonstrate data sharing between two containers:
+   docker run -it --name ubuntuA -v studentdata:/student ubuntu bash
+   cd /student
+   echo "Shared between containers" > shared.txt
+   exit
+
+   docker run -it --name ubuntuB -v studentdata:/student ubuntu bash
+   cd /student
+   cat shared.txt
