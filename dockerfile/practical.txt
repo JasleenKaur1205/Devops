@@ -1,0 +1,14 @@
+#Base image
+Ubuntu latest
+
+#Command 
+apt update && apt install -y php
+
+#Build 
+docker build -t ub1 .
+
+#Run 
+docker run -it ub1 bash
+
+#Verification
+php -v
