@@ -1,0 +1,30 @@
+Objective
+To create and run a simple Jenkins pipeline without using Git or Docker.
+
+Step 1: Open Jenkins Dashboard
+Go to http://localhost:8080 and login.
+
+Step 2: Create a New Pipeline Job
+- Click on 'New Item'
+- Enter job name: simple-pipeline
+- Select 'Pipeline'
+- Click OK
+
+Step 3: Configure Pipeline Script
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+
+Step 4: Run Pipeline
+
+Click Build Now
