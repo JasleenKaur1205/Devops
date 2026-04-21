@@ -1,0 +1,49 @@
+Objective
+To create a Jenkins pipeline that pulls a Docker image from Docker Hub and runs it as a container.
+
+Step 1: Open Jenkins Dashboard
+Go to http://localhost:8080 and login.
+
+Step 2: Create a New Pipeline Job
+- Click on 'New Item'
+- Enter job name: simple-pipeline
+- Select 'Pipeline'
+- Click OK
+
+Step 3: Open Docker Desktop 
+
+Step 4: Configure Jenkins Pipeline
+pipeline {
+    agent any
+    
+    stages {
+        stage('Check Docker') {
+            steps {
+                bat 'docker --version'
+            }
+        }
+        stage('Pull Docker Image') {
+            steps {
+                bat 'docker pull nginx'
+            }
+        }
+        stage('Run Container') {
+            steps {
+                bat 'docker run -d -p 8085:80 --name my-nginx nginx'
+            }
+        }
+        stage('Verify Container') {
+
+            steps {
+                bat 'docker ps'
+            }
+        }
+    }
+}
+
+Step 5: Run Pipeline
+
+Click Build Now
+
+Step 6: Verify Output
+Open browser and go to: http://localhost:8085
