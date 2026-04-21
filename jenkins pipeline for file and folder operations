@@ -1,0 +1,50 @@
+Objective
+To create a Jenkins pipeline that performs file and folder operations using multi-stage execution.
+
+Step 1: Open Jenkins Dashboard
+Go to http://localhost:8080 and login.
+
+Step 2: Create a New Pipeline Job
+- Click on 'New Item'
+- Enter job name: simple-pipeline
+- Select 'Pipeline'
+- Click OK
+
+Step 3: Configure Jenkins pipeline
+pipeline {
+ agent any
+    stages {
+        stage('Project 1: Create Folder') {
+            steps {
+                echo "Project 1: Creating a folder 'myProjectFolder'"
+                 // For Linux/Unix agents:
+                 // sh 'mkdir -p myProjectFolder'
+                 // For Windows agents, uncomment the line below:
+                 bat 'mkdir Folder2Jenkins'
+            }
+        }
+        stage('Project 2: Create File') {
+            steps {
+                echo "Project 2: Creating a file 'myProjectFolder2/myFile.txt'"
+                // For Linux/Unix agents:
+                //sh 'touch Folder1Jenkins/myFile.txt'
+                // For Windows agents, uncomment the line below:
+                bat 'type nul > Folder1Jenkins\\myFile.txt'
+            }
+        }
+        stage('Project 3: Write Contents to File') {
+            steps {
+
+                echo "Project 3: Writing contents into 'myProjectFolder2/myFile.txt'"
+                // For Linux/Unix agents:
+                //sh 'echo "Hello, this is the content added by Project 3" > myProjectFolder/myFile.txt'
+                // For Windows agents, uncomment the line below:
+                bat 'echo Hello, this is the content added by Project 3 > Folder1Jenkins\\myFile.txt'
+            }
+        }
+    }
+}
+
+Step 4: Step 4: Run Pipeline
+
+Click Build Now
